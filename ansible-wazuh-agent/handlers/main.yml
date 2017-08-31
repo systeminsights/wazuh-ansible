@@ -4,3 +4,6 @@
 
 - name: restart wazuh-agent windows
   win_service: name=OssecSvc start_mode=auto state=restarted
+
+- name: restart wazuh-agent solaris 10
+  shell: /etc/init.d/wazuh-agent restart

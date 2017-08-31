@@ -12,6 +12,9 @@ wazuh_winagent_config:
   revision: '1'
   repo: https://packages.wazuh.com/windows/
   md5: 715fbd55f670c2cecc607f2cbd0b2310
+wazuh_solaris10_sparc:
+  src: /srv/solaris10_pkgs/wazuh-agent_2.1.0-sol10-sparc.pkg
+  md5: 4bd085f4a9b6982f431143fde70bdd3d
 wazuh_agent_config:
   log_format: 'plain'
   syscheck:

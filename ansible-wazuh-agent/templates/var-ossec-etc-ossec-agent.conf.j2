@@ -31,7 +31,7 @@
 
   <active-response>
     <disabled>no</disabled>
-  </active-response> 
+  </active-response>
 
   <rootcheck>
     <disabled>no</disabled>
@@ -53,7 +53,7 @@
     <windows_malware>./shared/win_malware_rcl.txt</windows_malware>
     {% endif %}
 
-    {% if ansible_system == "Linux" %}
+    {% if ansible_system == "Linux" or ansible_os_family == "Solaris" %}
     <rootkit_files>/var/ossec/etc/shared/rootkit_files.txt</rootkit_files>
     <rootkit_trojans>/var/ossec/etc/shared/rootkit_trojans.txt</rootkit_trojans>
     <system_audit>/var/ossec/etc/shared/system_audit_rcl.txt</system_audit>
@@ -74,6 +74,10 @@
 
     {% if ansible_system == "Linux" %}
     <directories check_all="yes" realtime="yes" restrict="^/var/ossec/etc/shared/agent.conf$">/var/ossec/etc/shared</directories>
+    {% endif %}
+
+    {% if ansible_os_family == "Solaris" %}
+    <directories check_all="yes" restrict="^/var/ossec/etc/shared/agent.conf$">/var/ossec/etc/shared</directories>
     {% endif %}
 
     <auto_ignore>{{ wazuh_agent_config.syscheck.auto_ignore }}</auto_ignore>

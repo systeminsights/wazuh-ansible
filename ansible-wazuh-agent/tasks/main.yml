@@ -4,3 +4,9 @@
 
 - include: "Linux.yml"
   when: ansible_system == "Linux"
+
+- include: "Solaris10.yml"
+  when:
+    - ansible_os_family == "Solaris"
+    - ansible_architecture == "sun4v"
+    - ansible_distribution_version == "10"
