@@ -2,6 +2,6 @@
 - hosts: wazuh-ELK-single
   roles:
       - { role: ansible-wazuh-manager }
-      - { role: ansible-role-elasticsearch, elasticsearch_network_host: 'localhost' }
-      - { role: ansible-role-logstash, elasticsearch_network_host: 'localhost' }
+      - { role: ansible-role-elasticsearch, elasticsearch_tunning: true, elasticsearch_network_host: 'localhost' }
+      - { role: ansible-role-logstash, logstash_input_beats: false, elasticsearch_network_host: 'localhost' }
       - { role: ansible-role-kibana, elasticsearch_network_host: 'localhost' }

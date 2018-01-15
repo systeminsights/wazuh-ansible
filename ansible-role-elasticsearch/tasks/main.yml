@@ -5,6 +5,12 @@
 - import_tasks: Debian.yml
   when: ansible_os_family == "Debian"
 
+- name: Create elasticsearch.service.d folder.
+  file: path=/etc/systemd/system/elasticsearch.service.d/ state=directory
+  when:
+    - elasticsearch_tunning == true
+    - use_system_d == true
+
 - name: Configure Elasticsearch.
   template:
     src: elasticsearch.yml.j2
@@ -14,6 +20,19 @@
     mode: 0660
   notify: restart elasticsearch
   tags: configure
+
+- name: Configure Elasticsearch System Resources.
+  template:
+    src: elasticsearch.conf.j2
+    dest: /etc/systemd/system/elasticsearch.service.d/elasticsearch.conf
+    owner: root
+    group: elasticsearch
+    mode: 0660
+  notify: restart elasticsearch
+  tags: configure
+  when:
+    - elasticsearch_tunning == true
+    - use_system_d == true
 
 - name: Configure Elasticsearch JVM memmory.
   template:

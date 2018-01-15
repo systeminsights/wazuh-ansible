@@ -41,7 +41,11 @@ path.logs: /var/log/elasticsearch
 #
 # Lock the memory on startup:
 #
+{% if elasticsearch_tunning == true %}
 bootstrap.memory_lock: true
+{% else %}
+#bootstrap.memory_lock: true
+{% endif %}
 #
 # Make sure that the heap size is set to about half the memory available
 # on the system and that the owner of the process is allowed to use this

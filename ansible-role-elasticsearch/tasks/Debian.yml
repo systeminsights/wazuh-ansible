@@ -35,3 +35,19 @@
 - name: Debian/Ubuntu | Install Elasticsarch
   apt: name=elasticsearch={{ elastic_stack_version }} state=present update_cache=yes
   tags: install
+
+- name: Set use_systemd parameter
+  set_fact: use_system_d={{(ansible_distribution == 'Debian' and ansible_distribution_version | version_compare('8', '>=')) or (ansible_distribution in ['RedHat','CentOS'] and ansible_distribution_version | version_compare('7', '>=')) or (ansible_distribution == 'Ubuntu' and ansible_distribution_version | version_compare('15', '>=')) }}
+
+- name: Configure Elasticsearch System Resources.
+  template:
+    src: elasticsearch.j2
+    dest: /etc/default/elasticsearch
+    owner: root
+    group: elasticsearch
+    mode: 0660
+  notify: restart elasticsearch
+  tags: configure
+  when:
+    - elasticsearch_tunning == true
+    - use_system_d == false
