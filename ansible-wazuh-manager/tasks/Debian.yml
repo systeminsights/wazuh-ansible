@@ -91,3 +91,34 @@
   changed_when: true
   tags:
     - config
+
+- name: get latest version of manager apt package
+  shell: "apt-cache madison wazuh-manager | grep {{ wazuh_version }} | head -1 | awk '{print $3}'"
+  register: pkg_cmd
+  changed_when: false
+
+- set_fact:
+    wazuh_manager_package_version: "{{ pkg_cmd.stdout }}"
+
+- name: get latest version of api apt package
+  shell: "apt-cache madison wazuh-api | grep {{ wazuh_version }} | head -1 | awk '{print $3}'"
+  register: pkg_cmd_api
+  changed_when: false
+
+- set_fact:
+    wazuh_api_package_version: "{{ pkg_cmd_api.stdout }}"
+
+- name: install wazuh manager
+  apt:
+    name: "wazuh-manager={{ wazuh_manager_package_version }}"
+    state: present
+
+- name: install wazuh manager
+  apt:
+    name: "wazuh-api={{ wazuh_api_package_version }}"
+    state: present
+
+- name: install wazuh manager
+  apt:
+    name: "expect"
+    state: latest
