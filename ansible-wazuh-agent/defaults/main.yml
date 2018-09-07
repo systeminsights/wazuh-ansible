@@ -1,4 +1,5 @@
 ---
+wazuh_version: 3.6.0
 wazuh_managers:
   - address: 127.0.0.1
     port: 1514
@@ -6,6 +7,7 @@ wazuh_managers:
     api_port: 55000
     api_proto: 'http'
     api_user: null
+    api_pass: null
 wazuh_profile: null
 wazuh_auto_restart: 'yes'
 wazuh_agent_authd:

@@ -12,7 +12,7 @@
     - wazuh-api
     - expect
   when:
-    - not (( ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat' or ansible_os_family == 'Debian' ) and ansible_distribution_major_version|int < 6 )
+    - not (( ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat' ) and ansible_distribution_major_version|int < 6  or ansible_os_family == 'Debian')
   tags:
     - init
 
@@ -117,28 +117,6 @@
   notify: restart wazuh-manager
   tags:
     - init
-    - config
-
-- name: Retrieving Agentless Credentials
-  include_vars: agentless_creeds.yml
-  tags:
-    - config
-
-- name: Retrieving authd Credentials
-  include_vars: authd_pass.yml
-  tags:
-    - config
-
-- name: Retrieving Wazuh-API User Credentials
-  include_vars: wazuh_api_creds.yml
-  when:
-    - not (( ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat' ) and ansible_distribution_major_version|int < 6 )
-  tags:
-    - config
-
-- name: Retrieving CDB lists
-  include_vars: cdb_lists.yml
-  tags:
     - config
 
 - name: Check if syslog output is enabled

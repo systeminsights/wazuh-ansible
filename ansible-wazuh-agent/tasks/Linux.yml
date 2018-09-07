@@ -11,6 +11,7 @@
   poll: 15
   tags:
     - init
+  when: not (ansible_os_family == 'Debian')
 
 - name: Linux | Check if client.keys exists
   stat: path=/var/ossec/etc/client.keys
@@ -20,12 +21,6 @@
 
 - name: Linux | Agent registration via authd
   block:
-
-    - name: Retrieving authd Credentials
-      include_vars: authd_pass.yml
-      tags:
-        - config
-        - authd
 
     - name: Copy CA, SSL key and cert for authd
       copy:
@@ -76,12 +71,6 @@
 - name: Linux | Agent registration via rest-API
   block:
 
-    - name: Retrieving rest-API Credentials
-      include_vars: api_pass.yml
-      tags:
-        - config
-        - api
-
     - name: Linux | Create the agent key via rest-API
       uri:
         url: "{{ wazuh_managers.0.api_proto }}://{{ wazuh_managers.0.address }}:{{ wazuh_managers.0.api_port }}/agents/"
@@ -122,6 +111,8 @@
       tags:
         - config
         - api
+
+    - debug: var=check_keys
 
     - name: Linux | Register agent (via rest-API)
       command: /var/ossec/bin/manage_agents
