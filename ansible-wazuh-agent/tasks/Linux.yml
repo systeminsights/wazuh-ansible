@@ -112,8 +112,6 @@
         - config
         - api
 
-    - debug: var=check_keys
-
     - name: Linux | Register agent (via rest-API)
       command: /var/ossec/bin/manage_agents
       environment:
