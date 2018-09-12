@@ -76,7 +76,7 @@
         url: "{{ wazuh_managers.0.api_proto }}://{{ wazuh_managers.0.address }}:{{ wazuh_managers.0.api_port }}/agents/"
         validate_certs: no
         method: POST
-        body: {"name":"{{ inventory_hostname }}"}
+        body: {"name":"{{ ansible_hostname }}", "ip": "{{ inventory_hostname }}"}
         body_format: json
         status_code: 200
         headers:
