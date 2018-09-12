@@ -113,12 +113,12 @@
     name: "wazuh-manager={{ wazuh_manager_package_version }}"
     state: present
 
-- name: install wazuh manager
+- name: install wazuh api
   apt:
     name: "wazuh-api={{ wazuh_api_package_version }}"
     state: present
 
-- name: install wazuh manager
+- name: install expect
   apt:
     name: "expect"
     state: latest

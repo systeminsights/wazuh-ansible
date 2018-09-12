@@ -45,6 +45,18 @@
     <log_format>{{ wazuh_manager_config.log_format }}</log_format>
   </logging>
 
+  <labels>
+    <label key="aws_instance_id">{{ ansible_ec2_instance_id }}</label>
+    <label key="aws_ami_id">{{ ansible_ec2_ami_id }}</label>
+    <label key="aws_instance_type">{{ ansible_ec2_instance_type }}</label>
+    <label key="aws_availability_zone">{{ ansible_ec2_placement_availability_zone }}</label>
+    <label key="aws_region">{{ ansible_ec2_placement_region }}</label>
+    <label key="aws_reservation_id">{{ ansible_ec2_reservation_id }}</label>
+    <label key="os_arch">{{ ansible_architecture }}</label>
+    <label key="env">{{ env }}</label>
+    <label key="host_role">{{ wazuh_host_role | default('wazuh_manager') }}</label>
+  </labels>
+
 {% if wazuh_manager_config.authd.enable == true %}
   <auth>
     <disabled>no</disabled>

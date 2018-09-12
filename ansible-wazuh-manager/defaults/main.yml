@@ -1,6 +1,6 @@
 ---
 wazuh_manager_fqdn: "wazuh-server"
-wazuh_version: 3.6.0
+wazuh_version: 3.6.1
 wazuh_manager_config:
   json_output: 'yes'
   alerts_log: 'yes'
