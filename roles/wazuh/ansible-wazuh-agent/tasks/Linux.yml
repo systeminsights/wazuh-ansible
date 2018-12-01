@@ -11,6 +11,8 @@
   poll: 15
   tags:
     - init
+#HACK
+#  when: not (ansible_os_family == 'Debian')
 
 - name: Linux | Check if client.keys exists
   stat: path=/var/ossec/etc/client.keys
@@ -87,7 +89,8 @@
         url: "{{ wazuh_managers.0.api_proto }}://{{ wazuh_managers.0.address }}:{{ wazuh_managers.0.api_port }}/agents/"
         validate_certs: no
         method: POST
-        body: {"name":"{{ inventory_hostname }}"}
+        #HACK
+        body: {"name":"{{ ansible_hostname }}", "ip": "{{ inventory_hostname }}"}
         body_format: json
         status_code: 200
         headers:

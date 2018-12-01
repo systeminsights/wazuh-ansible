@@ -13,6 +13,9 @@
     - expect
   when:
     - not (( ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat' ) and ansible_distribution_major_version|int < 6 )
+#HACK
+#    - not (ansible_os_family == 'Debian')
+
   tags:
     - init
 

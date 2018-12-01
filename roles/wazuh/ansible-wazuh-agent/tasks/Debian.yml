@@ -74,3 +74,17 @@
   when: wazuh_agent_config.openscap.disable == 'no'
   tags:
     - config
+
+#HACK
+#- name: get latest version of agentapt package
+#  shell: "apt-cache madison wazuh-agent | grep {{ wazuh_version }} | head -1 | awk '{print $3}'"
+#  register: pkg_cmd
+#  changed_when: false
+#
+#- set_fact:
+#    wazuh_agent_package_version: "{{ pkg_cmd.stdout }}"
+#
+#- name: install wazuh agent
+#  apt:
+#    name: "wazuh-agent={{ wazuh_agent_package_version }}"
+#    state: present
