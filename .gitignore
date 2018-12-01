@@ -6,3 +6,21 @@ wazuh-elastic.yml
 wazuh-kibana.yml
 wazuh-logstash.yml
 wazuh-manager.yml
+
+
+## JetBrains template
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio
+
+# User-specific stuff:
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
+
+# Sensitive or high-churn files:
+.idea/dataSources.ids
+.idea/dataSources.xml
+.idea/sqlDataSources.xml
+.idea/dynamic.xml
+.idea/uiDesigner.xml
+.idea/sonarlint
+.idea/markdown*
