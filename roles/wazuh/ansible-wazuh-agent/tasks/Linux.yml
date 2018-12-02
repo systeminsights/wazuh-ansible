@@ -5,8 +5,11 @@
 - import_tasks: "Debian.yml"
   when: ansible_os_family == "Debian"
 
+#HACK
 - name: Linux | Install wazuh-agent
-  package: name=wazuh-agent state=present
+  package:
+    name: wazuh-agent={{ wazuh_agent_apt_version }}"
+    state: present
   async: 90
   poll: 15
   tags:
