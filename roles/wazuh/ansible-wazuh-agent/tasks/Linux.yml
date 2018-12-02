@@ -8,7 +8,7 @@
 #HACK
 - name: Linux | Install wazuh-agent
   package:
-    name: wazuh-agent={{ wazuh_agent_apt_version }}"
+    name: wazuh-agent={{ wazuh_agent_apt_version }}
     state: present
   async: 90
   poll: 15
