@@ -53,6 +53,7 @@
     <label key="{{ key }}">{{ value }}</label>
     {% endfor %}
   </labels>
+  {% endif %}
 
 {% if wazuh_manager_config.authd.enable == true %}
   <auth>
