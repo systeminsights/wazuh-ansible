@@ -1,4 +1,10 @@
 ---
+#HACK begin
+wazuh_version: 3.6.1
+wazuh_manager_apt_version: "{{ wazuh_version }}-1"
+wazuh_api_apt_version: "{{ wazuh_version }}-1"
+#HACK end
+
 wazuh_manager_fqdn: "wazuh-server"
 
 wazuh_manager_config:
@@ -185,8 +191,8 @@ wazuh_manager_config:
       expect: 'srcip'
       timeout_allowed: 'yes'
   ruleset:
-      rules_path: 'rules/'
-      decoders_path: 'decoders/'
+      rules_path: '/etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-wazuh-manager/custom_ruleset/rules/'
+      decoders_path: '/etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-wazuh-manager/custom_ruleset/decoders/'
   rule_exclude:
     - '0215-policy_rules.xml'
   active_responses:

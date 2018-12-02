@@ -5,17 +5,18 @@
 - import_tasks: "Debian.yml"
   when: ansible_os_family == "Debian"
 
+#HACK
 - name: Install wazuh-manager, wazuh-api and expect
-  package: pkg={{ item }} state=latest
+  package:
+    name: "{{ item }}"
+    state: latest
+    use: apt
   with_items:
-    - wazuh-manager
-    - wazuh-api
+    - wazuh-manager={{ wazuh_manager_apt_version }}
+    - wazuh-api={{ wazuh_api_apt_version }}
     - expect
   when:
     - not (( ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat' ) and ansible_distribution_major_version|int < 6 )
-#HACK
-#    - not (ansible_os_family == 'Debian')
-
   tags:
     - init
 

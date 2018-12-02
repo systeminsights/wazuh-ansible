@@ -1,7 +1,8 @@
 ---
-#HACK
+#HACK begin
 wazuh_version: 3.6.1
 wazuh_agent_apt_version: "{{ wazuh_version }}-1"
+#HACK begin
 
 wazuh_managers:
   - address: 127.0.0.1
