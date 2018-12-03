@@ -36,12 +36,13 @@
   </logging>
 
   <!-- HACK -->
-  {% if wazuh_agent_config.labels is defined %}
+  {% if wazuh_agent_config.labels is defined -%}
   <labels>
-    {% for key,value in wazuh_agent_config.labels %}
+    {% for key,value in wazuh_agent_config.labels.items() -%}
     <label key="{{ key }}">{{ value }}</label>
-    {% endfor %}
+    {% endfor -%}
   </labels>
+  {% endif %}
 
   <active-response>
     <disabled>{{ wazuh_agent_config.active_response_disabled|default('no') }}</disabled>

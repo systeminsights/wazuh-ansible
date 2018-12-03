@@ -47,11 +47,11 @@
   </logging>
 
   <!-- Hack -->
-  {% if wazuh_manager_config.labels is defined %}
+  {% if wazuh_manager_config.labels is defined -%}
   <labels>
-    {% for key,value in wazuh_manager_config.labels %}
+    {% for key,value in wazuh_manager_config.labels.items() -%}
     <label key="{{ key }}">{{ value }}</label>
-    {% endfor %}
+    {% endfor -%}
   </labels>
   {% endif %}
 
