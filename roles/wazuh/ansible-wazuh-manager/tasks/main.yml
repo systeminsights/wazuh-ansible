@@ -11,6 +11,14 @@
   tags:
     - init
   block:
+    - name: Determine installed version
+      command: dpkg-query -W -f='${Version}' wazuh-manager
+      register: wazuh_installed_version
+      changed_when: false
+      ignore_errors: true
+
+    - debug: msg="wazuh current version={{ wazuh_installed_version.stdout }}, target version={{ wazuh_manager_apt_version }}"
+
     - name: Install wazuh-manager, wazuh-api
       package:
         name: "{{ item }}"

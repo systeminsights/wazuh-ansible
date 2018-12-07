@@ -5,7 +5,15 @@
 - import_tasks: "Debian.yml"
   when: ansible_os_family == "Debian"
 
-#HACK
+#HACK begin
+- name: Determine installed version
+  command: dpkg-query -W -f='${Version}' wazuh-agent
+  register: wazuh_installed_version
+  changed_when: false
+  ignore_errors: true
+
+- debug: msg="wazuh current version={{ wazuh_installed_version.stdout }}, target version={{ wazuh_agent_apt_version }}"
+
 - name: Linux | Install wazuh-agent
   package:
     name: wazuh-agent={{ wazuh_agent_apt_version }}
@@ -15,6 +23,7 @@
   poll: 15
   tags:
     - init
+#HACK end
 
 - name: Linux | Check if client.keys exists
   stat: path=/var/ossec/etc/client.keys
