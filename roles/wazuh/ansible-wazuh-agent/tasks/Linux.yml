@@ -193,7 +193,15 @@
     - init
     - config
 
-- name: Linux | Ensure Wazuh Agent service is started and enabled
+- name: Linux | Ensure Wazuh Agent service is stopped and disabled when agent is not registered
+  when: not register_wazuh_agent
+  service:
+    name: wazuh-agent
+    enabled: no
+    state: stopped
+
+- name: Linux | Ensure Wazuh Agent service is started and enabled when agent is registered
+  when: register_wazuh_agent
   service:
     name: wazuh-agent
     enabled: yes

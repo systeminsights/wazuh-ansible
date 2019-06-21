@@ -106,3 +106,5 @@ wazuh_agent_config:
     - format: 'full_command'
       command: 'last -n 20'
       frequency: '360'
+
+register_wazuh_agent: false
